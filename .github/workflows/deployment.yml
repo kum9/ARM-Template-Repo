@@ -3,7 +3,7 @@ name: Deploy ARM Template
 on:
   push:
     branches:
-      - main  # Trigger on push to the 'main' branch (you can change to 'master' or any other branch)
+      - master  # Trigger on push to the 'main' branch (you can change to 'master' or any other branch)
 
 jobs:
   deploy:
