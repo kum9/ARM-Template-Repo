@@ -1,0 +1,49 @@
+name: Deploy ARM Template
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the 'main' branch (you can change to 'master' or any other branch)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Step 2: Set up Azure CLI
+    - name: Set up Azure CLI
+      uses: azure/setup-azurecli@v1
+      with:
+        azure-cliname: 'azure-cli'
+
+    # Step 3: Login to Azure
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # Step 4: Validate ARM template (optional but recommended)
+    - name: Validate ARM Template
+      run: |
+        az deployment group validate \
+          --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+          --template-file ./path/to/your-arm-template.json \
+          --parameters ./path/to/your-parameters.json
+      continue-on-error: true # Continue even if validation fails (you can remove this for strict failure)
+
+    # Step 5: Deploy ARM Template
+    - name: Deploy ARM Template
+      run: |
+        az deployment group create \
+          --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+          --template-file ./path/to/your-arm-template.json \
+          --parameters ./path/to/your-parameters.json
+
+    # Step 6: Clean up (Optional) - Delete temporary files if needed
+    - name: Clean up temporary files
+      run: |
+        rm -rf ./path/to/temporary-files/

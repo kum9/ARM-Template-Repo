@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_vm1_name": {
+            "value": null
+        },
+        "sshPublicKeys_vm1_key_name": {
+            "value": null
+        },
+        "virtualNetworks_Demo_vm_name": {
+            "value": null
+        },
+        "virtualMachines_peering_vm_name": {
+            "value": null
+        },
+        "virtualNetworks_peering_vm_name": {
+            "value": null
+        },
+        "networkInterfaces_vm1786_z1_name": {
+            "value": null
+        },
+        "sshPublicKeys_peering_vm_key_name": {
+            "value": null
+        },
+        "networkSecurityGroups_vm1_nsg_name": {
+            "value": null
+        },
+        "publicIPAddresses_peering_vm_ip_name": {
+            "value": null
+        },
+        "networkInterfaces_peering_vm638_z1_name": {
+            "value": null
+        },
+        "networkSecurityGroups_peering_vm_nsg_name": {
+            "value": null
+        },
+        "networkWatchers_NetworkWatcher_eastus_name": {
+            "value": null
+        },
+        "publicIPAddresses_NIC_Network_Security_Group1_name": {
+            "value": null
+        }
+    }
+}
