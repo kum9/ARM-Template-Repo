@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     # Step 2: Set up Azure CLI
-    - name: Set up Azure CLI
+    - name: Azure CLI - Deploy ARM Template
       uses: azure/CLI@v1  # Ensure this version is correct
 
     # Step 3: Login to Azure
