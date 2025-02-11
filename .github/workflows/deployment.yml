@@ -38,8 +38,8 @@ jobs:
       run: |
         az deployment group create \
           --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-          --template-file ./path/to/your-arm-template.json \
-          --parameters ./path/to/your-parameters.json
+          --template-file ./path/to/template.json \
+          --parameters ./path/to/parameters.json
 
     # Step 6: Clean up temporary files (if any)
     - name: Clean up temporary files
