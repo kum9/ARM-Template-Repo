@@ -3,7 +3,7 @@ name: Deploy ARM Template
 on:
   push:
     branches:
-      - master  # Trigger on push to the 'main' branch (you can change to any branch you want)
+      - master  # Trigger on push to the 'master' branch (you can change to any branch you want)
 
 jobs:
   deploy:
@@ -15,8 +15,12 @@ jobs:
       uses: actions/checkout@v2
 
     # Step 2: Set up Azure CLI
-    - name: Azure CLI - Deploy ARM Template
+    - name: Set up Azure CLI
       uses: azure/CLI@v1  # Ensure this version is correct
+      with:
+        inlineScript: |
+          # Check the version of Azure CLI to verify it's set up correctly
+          az --version
 
     # Step 3: Login to Azure
     - name: Login to Azure
