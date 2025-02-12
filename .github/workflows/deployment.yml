@@ -27,6 +27,8 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
+
 
     # Step 4: Validate ARM template (Optional but recommended)
     - name: Validate ARM Template
