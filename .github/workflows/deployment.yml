@@ -4,7 +4,7 @@ name: Deploy ARM Template to Azure
 on:
   push:
     branches:
-      - main  # This will trigger the workflow on push to 'main'
+      - main  # This will trigger the workflow on push to 'main' (change if using another branch)
   workflow_dispatch:  # Optional: Allows for manual trigger via GitHub UI
 
 jobs:
@@ -30,17 +30,26 @@ jobs:
           client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
-      # Step 4: Deploy ARM Template using the template and parameters file
-      - name: Deploy ARM Template
+      # Step 4: Validate ARM template (Optional but recommended)
+      - name: Validate ARM Template
         run: |
-          az group deployment create \
+          az deployment group validate \
             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
             --template-file arm-template.json \
-            --parameters parameters.json  # Reference parameters file
+            --parameters parameters.json
+        continue-on-error: true  # Continue even if validation fails (you can remove this for strict failure)
+
+      # Step 5: Deploy ARM Template using the template and parameters file
+      - name: Deploy ARM Template
+        run: |
+          az deployment group create \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --template-file arm-template.json \
+            --parameters parameters.json
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 5: Verify the deployment (Optional)
+      # Step 6: Verify the deployment (Optional)
       - name: Verify Deployment
         run: |
           # Optional: Check the deployment status or any resources to verify the deployment
